@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News📰 Detection System</title>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Arimo|Hind|Open+Sans+Condensed&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="login-box">
+            <h1 class="text-center mb-4">Fake News📰 Detector</h1>
+
+            <!-- Form for submitting the text for prediction -->
+            <form action="{{ url_for('predict') }}" method="POST">
+                <div class="form-group">
+                    <textarea name="message" rows="6" class="form-control" required="required"
+                        style="font-size: 18pt;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-large mb-4">Predict</button>
+
+                <!-- Display prediction results -->
+                <div class="results">
+                    {% if prediction %}
+                    {% if prediction == 'FAKE' %}
+                    <h3 class="text-danger">⚠️ Fake News Detected!</h3>
+                    {% elif prediction == 'REAL' %}
+                    <h3 class="text-success"><b>✔️ Real News!</b></h3>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
